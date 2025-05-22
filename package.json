@@ -9,7 +9,8 @@
     "lint": "eslint --fix"
   },
   "dependencies": {
-    "@bidpro-frontend/shared": "1.0.1",
+    "@bidpro-frontend/shared": "1.0.4",
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@heroui/button": "2.2.19",
     "@heroui/code": "2.2.14",
     "@heroui/input": "2.4.19",
@@ -24,10 +25,13 @@
     "@heroui/theme": "2.4.15",
     "@react-aria/ssr": "3.9.8",
     "@react-aria/visually-hidden": "3.8.22",
+    "@types/negotiator": "^0.6.3",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
     "intl-messageformat": "10.7.16",
+    "negotiator": "^1.0.0",
     "next": "15.3.1",
+    "next-intl": "^4.1.0",
     "next-themes": "0.4.6",
     "react": "18.3.1",
     "react-dom": "18.3.1"

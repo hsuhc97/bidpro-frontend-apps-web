@@ -1,0 +1,6 @@
+{
+    "LoginPage": {
+        "title": "Login",
+        "description": "Please enter your mobile number and sms code you received to login."
+    }
+}
