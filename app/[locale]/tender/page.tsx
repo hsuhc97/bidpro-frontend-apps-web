@@ -1,12 +1,12 @@
 import TenderPackagesComponent from "@/components/tender-packages";
 import { redirect } from "next/navigation";
 
-export default function TenderPage({
+export default async function TenderPage({
   searchParams,
 }: {
   searchParams: { id?: string };
 }) {
-  const id = searchParams.id;
+  const { id } = await searchParams;
 
   if (!id) redirect("/404");
 

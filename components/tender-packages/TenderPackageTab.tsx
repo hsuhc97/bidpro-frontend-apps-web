@@ -28,7 +28,7 @@ export default function TenderPackageTab(props: { tenderId: string, status: stri
 
   if (data.length === 0) {
     return (
-      <p className="font-extralight text-center py-4">{t("no-tender-packages")}</p>
+      <p className="font-light text-center py-4">{t("no-tender-packages")}</p>
     );
   }
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PaginationApi } from "@bidpro-frontend/shared/src/api/types";
 
 const initialData = {
@@ -10,21 +10,20 @@ const initialData = {
 
 const usePagination = (
   api: PaginationApi<any>,
+  pageNum: number,
   requestBody: Record<string, any>
 ) => {
-  const [initialLoader, setInitialLoader] = useState(true);
   const [data, setData] = useState<any[]>(initialData.data);
   const [total, setTotal] = useState(initialData.total);
   const [pages, setPages] = useState(initialData.pages);
-  const [pageNum, setPageNum] = useState(initialData.pageNum);
-  const [refreshing, setRefreshing] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const prevRequestBody = useRef(requestBody);
 
   // Fetch data for a given page
   const fetchData = async (pageNum: number, pageSize = 15) => {
     try {
+      setLoading(true);
       const response = await api({
         ...requestBody,
         pageNum,
@@ -37,19 +36,13 @@ const usePagination = (
         pageNum: pageNum,
       };
       // Create new object references for each item in the list
-      const newData = pageNum === 1 
-        ? result.data.map(item => ({...item}))
-        : [...data, ...result.data.map(item => ({...item}))];
-      setData(newData);
+      setData(result.data);
       setTotal(result.total);
-      setPageNum(result.pageNum);
       setPages(result.pages);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setRefreshing(false);
-      setLoadingMore(false);
-      setInitialLoader(false);
+      setLoading(false);
     }
   };
 
@@ -62,28 +55,13 @@ const usePagination = (
       JSON.stringify(prevRequestBody.current) !== JSON.stringify(requestBody)
     ) {
       prevRequestBody.current = requestBody;
-      setInitialLoader(true);
       fetchData(1); // Reload from the first page
     }
   }, [requestBody]);
 
-  // Pull-to-refresh
-  const handleRefresh = useCallback(() => {
-    setRefreshing(true);
-    fetchData(1); // Refresh from the first page
-  }, []);
-
-  // Load more data
-  const loadMore = () => {
-    if (!loadingMore && pageNum < pages) {
-      setLoadingMore(true);
-      fetchData(pageNum + 1);
-    }
-  };
-
-  const insertItem = (insert: any) => {};
-
-  const deleteItem = (id: string) => {};
+  useEffect(() => {
+    fetchData(pageNum);
+  }, [pageNum]);
 
   const updateItem = (id: string, update: any) => {
     setData((prev) => {
@@ -100,12 +78,8 @@ const usePagination = (
     data,
     total,
     pages,
-    refreshing,
-    loadingMore,
-    handleRefresh,
-    loadMore,
-    initialLoader,
     updateItem,
+    loading,
   };
 };
 

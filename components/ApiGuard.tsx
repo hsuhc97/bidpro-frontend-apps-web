@@ -28,6 +28,9 @@ export default function ApiGuard({ children }: { children: React.ReactNode }) {
       const user = await getUser();
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
+      } else {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
       }
     } finally {
       setLoading(false);

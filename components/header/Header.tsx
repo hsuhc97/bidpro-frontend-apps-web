@@ -37,12 +37,10 @@ const Header = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     ApiClient.getInstance().setToken("");
-    const locale = window.location.pathname.split("/")[1];
-    router.replace(`/${locale}/login`);
   }
 
   return (
-    <Navbar isBordered>
+    <Navbar>
       <NavbarBrand>
         <p className="font-bold text-xl">{process.env.NEXT_PUBLIC_APP_NAME}</p>
       </NavbarBrand>

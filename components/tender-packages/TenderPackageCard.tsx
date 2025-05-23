@@ -23,12 +23,12 @@ export default function TenderPackageCard(tenderPackage: TenderPackage) {
       <CardHeader>
         <div className="flex flex-col">
           <p className="font-medium">{tenderPackage.name}</p>
-          <p className="font-extralight text-sm">{tenderPackage.description}</p>
+          <p className="font-light text-sm">{tenderPackage.description}</p>
         </div>
       </CardHeader>
       <Divider className="bg-gray-100" />
       <CardBody>
-        <p className="font-extralight">
+        <p className="font-light">
           {t("summary", {
             count: tenderPackage.numberOfLots,
             quantity: tenderPackage.quantity,
@@ -37,7 +37,7 @@ export default function TenderPackageCard(tenderPackage: TenderPackage) {
       </CardBody>
       <Divider className="bg-gray-100" />
       <CardFooter>
-        <p className="font-extralight">
+        <p className="font-light">
           {dayjs(tenderPackage.closeTime * 1000).format("YYYY-MM-DD HH:mm")}
         </p>
       </CardFooter>

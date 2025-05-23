@@ -36,7 +36,7 @@ export default function TenderCard(tender: Tender) {
         />
         <div className="flex flex-col items-start gap-1">
           <p className="font-medium">{tender.name}</p>
-          <p className="font-extralight text-sm">{tender.description}</p>
+          <p className="font-light text-sm">{tender.description}</p>
         </div>
       </CardHeader>
       <Divider className="bg-gray-100" />
@@ -49,7 +49,7 @@ export default function TenderCard(tender: Tender) {
           </p>
         )}
         {tender.numberOfProcessingLots === 0 && (
-          <p className="font-extralight">{t("no-processing-lots")}</p>
+          <p className="font-light">{t("no-processing-lots")}</p>
         )}
       </CardBody>
     </Card>

@@ -64,7 +64,13 @@
       },
       "watch": "关注",
       "unwatch": "取关",
-      "filter": "筛选"
+      "filter": "筛选",
+      "close": "取消"
+    },
+    "alerts": {
+      "login-required": "您尚未登录，无法参与投标。如果您对此项目感兴趣，请先登录您的账号以继续。",
+      "available-quota": "可用额度",
+      "currency": "当前货币"
     },
     "title": "标题",
     "grade": "级别",
@@ -78,5 +84,10 @@
     "asking-max-bid-price": "最高报价",
     "close-time": "结束时间",
     "bid-status": "状态"
-  }
+  },
+  "Currency": {
+    "USD": "美元",
+    "CNY": "人民币",
+    "HKD": "港币"
+  } 
 }

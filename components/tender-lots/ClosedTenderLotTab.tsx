@@ -22,15 +22,11 @@ import {
   Button,
   Input,
   Link,
-  Select,
-  SelectItem,
-  Autocomplete,
-  AutocompleteItem,
 } from "@heroui/react";
 import CountDown from "../count-down";
 
 export default function ClosedTenderLotTab(props: {
-  userId: string | null;
+  userId: string | undefined;
   tenderPackage: TenderPackage;
   type: "All" | "Watching" | "Closed";
   filter: {
@@ -42,8 +38,6 @@ export default function ClosedTenderLotTab(props: {
   const { userId, tenderPackage, type, filter } = props;
   const t = useTranslations("TenderLot");
   const locale = window.location.pathname.split("/")[1];
-
-  const [page, setPage] = React.useState(1);
 
   const renderCell = React.useCallback((tenderLot: any, columnKey: any) => {
     const cellValue = tenderLot[columnKey as keyof TenderLot];
@@ -87,23 +81,19 @@ export default function ClosedTenderLotTab(props: {
     }
   }, []);
 
+  const [pageNum, setPageNum] = React.useState(1);
   const {
     data,
-    total,
     pages,
-    refreshing,
-    loadingMore,
-    handleRefresh,
-    loadMore,
-    initialLoader,
-  } = usePagination(queryTenderLot, {
-    tenderPackageId: tenderPackage.id,
+    loading,
+  } = usePagination(queryTenderLot, pageNum, {
+    packageId: tenderPackage.id,
     ...filter,
     status:
       type == "Closed" ? TenderLotStatus.CLOSED : TenderLotStatus.PROCESSING,
   });
 
-  const loadingState = loadingMore ? "loading" : "idle";
+  const loadingState = loading ? "loading" : "idle";
 
   const columns = [
     { key: "title", label: t("title") },
@@ -112,26 +102,17 @@ export default function ClosedTenderLotTab(props: {
     { key: "lockCondition", label: t("lock-condition") },
   ];
 
-  if (tenderPackage.status === TenderPackageStatus.PROCESSING) {
-    columns.push({ key: "closeTime", label: t("close-time") });
-    if (tenderPackage.bidType === BidType.SEALED) {
-      columns.push({ key: "currentPrice", label: t("current-price") });
-    }
-    if (userId) {
-      columns.push({ key: "bidPrice", label: t("bid-price") });
-      columns.push({ key: "actions", label: t("actions.label") });
-    }
-  }
   if (tenderPackage.status === TenderPackageStatus.CLOSED) {
     if (userId) {
       columns.push({ key: "bidPrice", label: t("bid-price") });
       columns.push({ key: "bidStatus", label: t("bid-status") });
-      columns.push({ key: "actions", label: t("actions.label") });
     }
   }
 
   return (
     <Table
+      shadow="none"
+      className="border-1 rounded-lg my-1"
       aria-label="Example table with client side pagination"
       topContent={
         <div className="flex flex-wrap">
@@ -142,9 +123,9 @@ export default function ClosedTenderLotTab(props: {
                 isCompact
                 showControls
                 showShadow
-                page={page}
+                page={pageNum}
                 total={pages}
-                onChange={(page) => setPage(page)}
+                onChange={(page) => setPageNum(page)}
               />
             </div>
           )}
@@ -166,7 +147,7 @@ export default function ClosedTenderLotTab(props: {
         loadingContent={<Spinner />}
         loadingState={loadingState}
         emptyContent={
-          <p className="font-extralight text-center py-4">
+          <p className="font-light text-center py-4">
             {t("no-tender-lots")}
           </p>
         }
