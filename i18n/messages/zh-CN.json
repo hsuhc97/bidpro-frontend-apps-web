@@ -1,33 +1,80 @@
 {
-    "Header": {
-        "tender": "投标"
+  "Header": {
+    "log-in": "登录",
+    "settings": "设置",
+    "log-out": "退出登录"
+  },
+  "LoginComponent": {
+    "title": "欢迎使用",
+    "mobileNo-instruction": "请输入您的手机号码，我们将发送验证码到您的手机。",
+    "otp-instruction": "请输入您收到的验证码，以继续登录。",
+    "regionCode": {
+      "label": "地区码",
+      "placeholder": "请选择您的地区码"
     },
-    "LoginComponent": {
-        "title": "欢迎使用",
-        "mobileNo-instruction": "请输入您的手机号码，我们将发送验证码到您的手机。",
-        "otp-instruction": "请输入您收到的验证码，以继续登录。",
-        "regionCode": {
-            "label": "地区码",
-            "placeholder": "请选择您的地区码"
-        },
-        "mobileNo": {
-            "label": "手机号",
-            "placeholder": "请输入您的手机号"
-        },
-        "otp": {
-            "label": "验证码",
-            "placeholder": "请输入您的短信验证码"
-        },
-        "button": {
-            "confirm": "确认",
-            "back": "返回"
-        },
-        "message": {
-            "empty-mobileNo": "手机号不能为空",
-            "empty-otp": "验证码不能为空",
-            "empty-regionCode": "地区码不能为空",
-            "send-otp-success": "验证码已发送，请注意查收。",
-            "login-success": "欢迎回来"
-        }
+    "mobileNo": {
+      "label": "手机号",
+      "placeholder": "请输入您的手机号"
+    },
+    "otp": {
+      "label": "验证码",
+      "placeholder": "请输入您的短信验证码"
+    },
+    "button": {
+      "confirm": "确认",
+      "back": "返回"
+    },
+    "message": {
+      "empty-mobileNo": "手机号不能为空",
+      "empty-otp": "验证码不能为空",
+      "empty-regionCode": "地区码不能为空",
+      "send-otp-success": "验证码已发送，请注意查收。",
+      "login-success": "欢迎回来"
     }
+  },
+  "Tender": {
+    "title": "投标",
+    "for-more-details-plz-refer-to": "有关投标更详细的说明请参考",
+    "instructions": "投标说明",
+    "number-of-processing-lots": "{count}个投标进行中",
+    "no-processing-lots": "暂无投标",
+    "visit": "查看详情"
+  },
+  "TenderPackage": {
+    "no-tender-packages": "暂无投标",
+    "processing": "进行中",
+    "closed": "已结束",
+    "yesterday": "昨天",
+    "day-before-yesterday": "前天",
+    "over-three-days-ago": "三天前",
+    "summary": "{count}个投标，{quantity}件"
+  },
+  "TenderLot": {
+    "no-tender-lots": "暂无投标",
+    "all": "全部",
+    "watching": "关注中",
+    "closed": "已结束",
+    "won": "已中标",
+    "lost": "未中标",
+    "actions": {
+      "label": "操作",
+      "bid": {
+        "label": "报价",
+        "placeholder": "请输入您的报价"
+      },
+      "watch": "关注",
+      "unwatch": "取关"
+    },
+    "title": "标题",
+    "grade": "级别",
+    "lock-condition": "锁",
+    "quantity": "数量",
+    "quantity-with-unit": "{quantity}件",
+    "current-price": "现价",
+    "bid-price": "报价",
+    "asking-min-bid-price": "最低报价",
+    "asking-max-bid-price": "最高报价",
+    "close-time": "结束时间",
+    "bid-status": "状态"
+  }
 }

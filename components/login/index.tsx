@@ -49,7 +49,6 @@ export default function LoginComponent() {
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     if (token) {
       ApiClient.getInstance().setToken(token);
       const locale = window.location.pathname.split("/")[1];
@@ -132,7 +131,7 @@ export default function LoginComponent() {
     <div className="flex flex-col max-w-[400px] mx-auto">
       <section className="flex flex-col my-4 gap-2">
         <section className="flex flex-col">
-          <span className="text-3xl text-primary font-bold">{t("title")}</span>
+          <span className="text-3xl text-primary font-bold">{t("title")}{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </section>
         {!otpSent && (
           <section className="flex flex-col gap-2">

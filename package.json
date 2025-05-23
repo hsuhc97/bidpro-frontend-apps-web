@@ -9,7 +9,7 @@
     "lint": "eslint --fix"
   },
   "dependencies": {
-    "@bidpro-frontend/shared": "1.0.4",
+    "@bidpro-frontend/shared": "1.0.7",
     "@formatjs/intl-localematcher": "^0.6.1",
     "@heroui/button": "2.2.19",
     "@heroui/code": "2.2.14",
@@ -27,6 +27,7 @@
     "@react-aria/visually-hidden": "3.8.22",
     "@types/negotiator": "^0.6.3",
     "clsx": "2.1.1",
+    "dayjs": "^1.11.13",
     "framer-motion": "11.13.1",
     "intl-messageformat": "10.7.16",
     "negotiator": "^1.0.0",

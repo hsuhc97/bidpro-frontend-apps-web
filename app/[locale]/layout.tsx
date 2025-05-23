@@ -12,7 +12,16 @@ import { notFound } from "next/navigation";
 import { getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/header/Header";
-import { ApiClient } from "@bidpro-frontend/shared";
+import ApiGuard from "@/components/ApiGuard";
+
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -46,7 +55,11 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale || DEFAULT_LOCALE} suppressHydrationWarning>
+    <html
+      lang={locale || DEFAULT_LOCALE}
+      suppressHydrationWarning
+      className={inter.className}
+    >
       <head />
       <body
         className={clsx(
@@ -57,14 +70,16 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
             <div className="relative flex flex-col h-screen">
-              <Header />
-              <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-                {children}
-              </main>
-              <footer className="w-full flex items-center justify-center py-3">
-                <span className="text-default-600">Powered by</span>
-                <p className="text-primary">&nbsp;Orient AI</p>
-              </footer>
+              <ApiGuard>
+                <Header />
+                <main className="container mx-auto max-w-7xl pt-16 px-6 flex-1 flex-grow">
+                  {children}
+                </main>
+                <footer className="w-full flex items-center justify-center py-3">
+                  <span className="text-default-600">Powered by</span>
+                  <p className="text-primary">&nbsp;Orient AI</p>
+                </footer>
+              </ApiGuard>
             </div>
           </Providers>
         </NextIntlClientProvider>
