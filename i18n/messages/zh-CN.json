@@ -63,13 +63,15 @@
         "placeholder": "请输入您的报价"
       },
       "watch": "关注",
-      "unwatch": "取关"
+      "unwatch": "取关",
+      "filter": "筛选"
     },
     "title": "标题",
     "grade": "级别",
     "lock-condition": "锁",
     "quantity": "数量",
     "quantity-with-unit": "{quantity}件",
+    "model": "机型",
     "current-price": "现价",
     "bid-price": "报价",
     "asking-min-bid-price": "最低报价",

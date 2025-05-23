@@ -22,6 +22,10 @@ import {
   Button,
   Input,
   Link,
+  Select,
+  SelectItem,
+  Autocomplete,
+  AutocompleteItem,
 } from "@heroui/react";
 import CountDown from "../count-down";
 
@@ -29,8 +33,13 @@ export default function ClosedTenderLotTab(props: {
   userId: string | null;
   tenderPackage: TenderPackage;
   type: "All" | "Watching" | "Closed";
+  filter: {
+    items: string[];
+    grades: string[];
+    lockConditions: string[];
+  };
 }) {
-  const { userId, tenderPackage, type } = props;
+  const { userId, tenderPackage, type, filter } = props;
   const t = useTranslations("TenderLot");
   const locale = window.location.pathname.split("/")[1];
 
@@ -89,6 +98,7 @@ export default function ClosedTenderLotTab(props: {
     initialLoader,
   } = usePagination(queryTenderLot, {
     tenderPackageId: tenderPackage.id,
+    ...filter,
     status:
       type == "Closed" ? TenderLotStatus.CLOSED : TenderLotStatus.PROCESSING,
   });
@@ -124,18 +134,21 @@ export default function ClosedTenderLotTab(props: {
     <Table
       aria-label="Example table with client side pagination"
       topContent={
-        pages > 1 && (
-          <div className="flex w-full justify-end">
-            <Pagination
-              isCompact
-              showControls
-              showShadow
-              page={page}
-              total={pages}
-              onChange={(page) => setPage(page)}
-            />
-          </div>
-        )
+        <div className="flex flex-wrap">
+          {pages > 1 && (
+            <div className="flex w-full justify-end">
+              <Pagination
+                className="justify-end"
+                isCompact
+                showControls
+                showShadow
+                page={page}
+                total={pages}
+                onChange={(page) => setPage(page)}
+              />
+            </div>
+          )}
+        </div>
       }
     >
       <TableHeader>

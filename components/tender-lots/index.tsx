@@ -1,6 +1,17 @@
 "use client";
 import React from "react";
-import { Spinner, Tab, Tabs } from "@heroui/react";
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Button,
+  Chip,
+  Divider,
+  Select,
+  SelectItem,
+  Spinner,
+  Tab,
+  Tabs,
+} from "@heroui/react";
 import { useTranslations } from "next-intl";
 import {
   getTenderPackage,
@@ -21,6 +32,16 @@ export default function TenderLotsComponent(props: {
   const [tenderPackage, setTenderPackage] =
     React.useState<TenderPackage | null>(null);
   const [userId, setUserId] = React.useState<string | null>(null);
+
+  const [filter, setFilter] = React.useState<{
+    items: string[];
+    grades: string[];
+    lockConditions: string[];
+  }>({
+    items: [],
+    grades: [],
+    lockConditions: [],
+  });
 
   React.useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -56,9 +77,100 @@ export default function TenderLotsComponent(props: {
 
   return (
     <div className="mx-auto max-w-7xl">
+      {tenderPackage.filter && (
+        <>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="flex-1 font-medium">{t("actions.filter")}</p>
+            <Select
+              className="w-[240px]"
+              size="sm"
+              label={t("model")}
+              selectedKeys={filter.items}
+              onChange={(e) => {
+                setFilter({ ...filter, items: e.target.value.split(",") });
+              }}
+              selectionMode="multiple"
+            >
+              {tenderPackage.filter.items.map((item) => (
+                <SelectItem key={item} textValue={item}>
+                  {item}
+                </SelectItem>
+              ))}
+            </Select>
+            <Select
+              className="w-[240px]"
+              size="sm"
+              label={t("grade")}
+              selectedKeys={filter.grades}
+              onChange={(e) => {
+                setFilter({ ...filter, grades: e.target.value.split(",") });
+              }}
+              selectionMode="multiple"
+            >
+              {tenderPackage.filter.grades.map((grade) => (
+                <SelectItem key={grade} textValue={grade}>
+                  {grade}
+                </SelectItem>
+              ))}
+            </Select>
+            <Select
+              className="w-[240px]"
+              size="sm"
+              label={t("lock-condition")}
+              selectedKeys={filter.lockConditions}
+              onChange={(e) => {
+                setFilter({
+                  ...filter,
+                  lockConditions: e.target.value.split(","),
+                });
+              }}
+            >
+              {tenderPackage.filter.lockConditions.map((lockCondition) => (
+                <SelectItem key={lockCondition} textValue={lockCondition}>
+                  {lockCondition}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="flex flex-wrap gap-1 my-4">
+            {filter.items.length > 0 && (
+              <Chip
+                variant="flat"
+                onClose={() => {
+                  setFilter({ ...filter, items: [] });
+                }}
+              >
+                {filter.items.map((item) => item).join(", ")}
+              </Chip>
+            )}
+            {filter.grades.length > 0 && (
+              <Chip
+                variant="flat"
+                onClose={() => {
+                  setFilter({ ...filter, grades: [] });
+                }}
+              >
+                {filter.grades.map((grade) => grade).join(", ")}
+              </Chip>
+            )}
+            {filter.lockConditions.length > 0 && (
+              <Chip
+                variant="flat"
+                onClose={() => {
+                  setFilter({ ...filter, lockConditions: [] });
+                }}
+              >
+                {filter.lockConditions
+                  .map((lockCondition) => lockCondition)
+                  .join(", ")}
+              </Chip>
+            )}
+          </div>
+          <Divider className="my-4" />
+        </>
+      )}
       <Tabs
         aria-label="Options"
-        isVertical
         selectedKey={selected}
         onSelectionChange={(key) => setSelected(key as string)}
       >
@@ -69,6 +181,7 @@ export default function TenderLotsComponent(props: {
                 userId={userId}
                 tenderPackage={tenderPackage}
                 type="All"
+                filter={filter}
               />
             </Tab>
             {userId && (
@@ -77,6 +190,7 @@ export default function TenderLotsComponent(props: {
                   userId={userId}
                   tenderPackage={tenderPackage}
                   type="Watching"
+                  filter={filter}
                 />
               </Tab>
             )}
@@ -85,6 +199,7 @@ export default function TenderLotsComponent(props: {
                 userId={userId}
                 tenderPackage={tenderPackage}
                 type="Closed"
+                filter={filter}
               />
             </Tab>
           </>
@@ -96,6 +211,7 @@ export default function TenderLotsComponent(props: {
                 userId={userId}
                 tenderPackage={tenderPackage}
                 type="Closed"
+                filter={filter}
               />
             </Tab>
             <Tab className="flex-1" key="Lost" title={t("lost")}>
@@ -103,6 +219,7 @@ export default function TenderLotsComponent(props: {
                 userId={userId}
                 tenderPackage={tenderPackage}
                 type="Closed"
+                filter={filter}
               />
             </Tab>
           </>

@@ -13,7 +13,6 @@ export default function TenderPackagesComponent(props: { tenderId: string }) {
     <div className="mx-auto max-w-3xl">
       <Tabs
         aria-label="Options"
-        isVertical
         selectedKey={selected}
         onSelectionChange={(key) => setSelected(key as string)}
       >
