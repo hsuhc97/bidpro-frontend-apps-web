@@ -20,15 +20,11 @@ export default function TenderLotItemTable(props: { tenderLotId: string }) {
     data,
     total,
     pages,
-    refreshing,
-    loadingMore,
-    handleRefresh,
-    loadMore,
-    initialLoader,
-  } = usePagination(queryTenderLotItem, {
+    loading
+  } = usePagination(queryTenderLotItem, 1, {
     tenderLotId: tenderLotId,
   });
-  const loadingState = loadingMore || data?.length === 0 ? "loading" : "idle";
+  const loadingState = loading ? "loading" : "idle";
 
   return (
     <Table

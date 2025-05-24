@@ -11,11 +11,7 @@ export default function TendersComponent() {
     data,
     total,
     pages,
-    refreshing,
-    handleRefresh,
-    loadMore,
-    initialLoader,
-  } = usePagination(queryTender, {});
+  } = usePagination(queryTender, 1, {});
 
   return (
     <div className="flex flex-col items-center">

@@ -13,18 +13,15 @@ export default function TenderPackageTab(props: { tenderId: string, status: stri
     data,
     total,
     pages,
-    refreshing,
-    handleRefresh,
-    loadMore,
-    initialLoader,
-  } = usePagination(queryTenderPackage, {
+    loading
+  } = usePagination(queryTenderPackage, 1, {
     tenderId: tenderId,
     status: status,
   });
 
-  if (initialLoader) {
-    return <Spinner />;
-  }
+    if (loading) {
+      return <Spinner />;
+    }
 
   if (data.length === 0) {
     return (

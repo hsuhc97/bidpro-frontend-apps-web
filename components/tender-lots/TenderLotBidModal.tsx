@@ -26,7 +26,7 @@ export default function TenderLotBidModal(props: {
             <ModalHeader className="flex flex-col gap-1">
               {tenderLot?.title}
             </ModalHeader>
-            <ModalBody>
+            {/* <ModalBody>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                 pulvinar risus non risus hendrerit venenatis. Pellentesque sit
@@ -45,7 +45,7 @@ export default function TenderLotBidModal(props: {
                 consectetur esse laborum eiusmod pariatur proident Lorem eiusmod
                 et. Culpa deserunt nostrud ad veniam.
               </p>
-            </ModalBody>
+            </ModalBody> */}
             <ModalFooter>
               <Button color="danger" variant="ghost" onPress={onClose}>
                 {t("actions.close")}
